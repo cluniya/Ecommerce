@@ -1,12 +1,23 @@
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px;
-    padding: 20px;
-  }
-  
-  .product-card {
-    margin: 10px;
-  }
-  
+.product-card {
+  width: 15rem; /* Ensure full width of column */
+  height: 30rem; /* Automatically adjust height */
+  text-align: center; /* Center-align text */
+  padding: 10px; /* Add padding */
+}
+
+.product-card img {
+  width: 100%; /* Ensure image fits within card */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.product-card .card-body {
+  padding: 10px; /* Adjust padding */
+}
+
+.product-card .card-title {
+  font-size: 1rem; /* Smaller font size */
+}
+
+.product-card .card-text {
+  font-size: 0.9rem; /* Smaller font size */
+}

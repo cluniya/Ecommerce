@@ -1,24 +1,21 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import "./ProductCart.css"
-function ProductCart(props) {
-    // console.log(props.title);
-  return (
-    <>
-    {/* <div className='container'> */}
-    <Card style={{ width: '15rem',height:"28rem",pading:'10px',margin:'10px'}}>
-      <Card.Img variant="top" src={props.image}
+import React, { useContext } from 'react';
+import { Card, Button } from 'react-bootstrap';
+import { CartContext } from '../../../Store/CartContext';
+import './ProductCart.css';
 
-/>
+const ProductCart = ({ product }) => {
+  const { addItemToCart } = useContext(CartContext);
+
+  return (
+    <Card className="product-card">
+      <Card.Img  variant="top" src={product.imageUrl} />
       <Card.Body>
-        <Card.Title>{props.title}</Card.Title>
-        <Card.Text>bulk of the card's content.</Card.Text>
-        <h4>${props.price}</h4>
-        <Button variant="primary">Add To Cart</Button>
+        <Card.Title>{product.title}</Card.Title>
+        <Card.Text>${product.price}</Card.Text>
+        <Button variant="primary" onClick={() => addItemToCart(product)}>Add to Cart</Button>
       </Card.Body>
     </Card>
-    </>
   );
-}
+};
 
 export default ProductCart;

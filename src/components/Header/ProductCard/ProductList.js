@@ -1,24 +1,19 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import ProductCart from './ProductCart';
-import './ProductCart.css';
 
-// import seeCart from '../../UI/SeeCart';
-
-function ProductList(props) {
+const ProductList = ({ productData }) => {
   return (
-    <div className='container'>
-      {props.productData.map((product, index) => (
-        <ProductCart
-          key={index}
-          title={product.title}
-          price={product.price}
-          image={product.imageUrl}
-        //   description={product.description}
-        />
-      ))}
-      {/* <seeCart/> */}
-    </div>
+    <Container>
+      <Row>
+        {productData.map((product, index) => (
+          <Col key={index} xs={12} md={6} lg={4} className="mb-4">
+            <ProductCart product={product} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
-}
+};
 
 export default ProductList;

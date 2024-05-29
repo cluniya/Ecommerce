@@ -1,19 +1,16 @@
 import React, { useContext } from 'react';
-import './CartButton.css'; // Custom CSS for styling the button
-import CartItem from './CartItem';
+import './CartButton.css';
 import { CartContext } from '../../Store/CartContext';
 
 function CartButton() {
-  const {isCartOpen,cartOpenHandler}=useContext(CartContext)
-  console.log(isCartOpen);
+  const { cartOpenHandler, cartItems } = useContext(CartContext);
+  const itemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
-    <>
     <button className="cart-button" onClick={cartOpenHandler}>
       <img src="https://www.shutterstock.com/image-vector/shopping-cart-icon-simple-linear-260nw-1090161545.jpg" alt="Cart" className="cart-icon" />
-      <span className="cart-text">Cart</span>
+      <span className="cart-text">Cart ({itemCount})</span>
     </button>
-    {/* <CartItem/> */}
-    </>
   );
 }
 
