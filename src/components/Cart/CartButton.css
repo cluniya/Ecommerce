@@ -1,0 +1,24 @@
+.cart-button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+  }
+  
+  .cart-icon {
+    width: 30px; /* Adjust the width and height as needed */
+    height: 30px;
+    margin-right: 5px;
+  }
+  
+  .cart-text {
+    font-weight: bold;
+  }
+  img{
+    border-radius: 5px;
+  }

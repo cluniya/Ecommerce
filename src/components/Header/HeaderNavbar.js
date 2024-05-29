@@ -5,10 +5,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./HeaderNavbar.css"
-// import ProductCart from './ProductCard/ProductCart';
 import ProductList from './ProductCard/ProductList';
-import seeCart from '../UI/SeeCart';
+import CartButton from '../Cart/CartButton';
 import FooterBar from './FooterBar';
+import CartItem from '../Cart/CartItem';
 
 
 function HeaderNavbar(props) {
@@ -49,21 +49,23 @@ function HeaderNavbar(props) {
             />
             <Button variant="outline-success">Search</Button>
           </Form>
+         
         </Navbar.Collapse>
       </Container>
+          <CartButton />
     </Navbar>
       <h1>
         The Generics
       </h1>
         <ProductList productData={props.productData}/>
+      <CartItem cartElement={props.productData}/>
 
         <div style={{ display: 'flex',
          justifyContent: 'center',
           alignItems: 'center',margin:'10px' }}>
       <Button>See the cart</Button>
-      </div>
-      {/* <FooterBar/> */}
-        
+      </div>  
+      <FooterBar/> 
       </>
   );
 }

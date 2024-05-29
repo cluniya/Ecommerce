@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderNavbar from './components/Header/HeaderNavbar';
-import FooterBar from './components/Header/FooterBar';
-// import seeCart from './components/UI/SeeCart';
+// import { ContextProvider } from 'react-bootstrap/dist/react-bootstrap';
+import { CartProvider } from './Store/CartContext';
 const productsArr = [
   {
     title: 'Colors',
@@ -47,10 +47,9 @@ const productsArr = [
 
 const App = () => {
   return (
-    <div>
+    <CartProvider>
      <HeaderNavbar productData={productsArr}/>
-     <FooterBar />
-    </div>
+    </CartProvider>
   )
 }
 

@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "./ProductCart.css"
 function ProductCart(props) {
-    console.log(props.title);
+    // console.log(props.title);
   return (
     <>
     {/* <div className='container'> */}
