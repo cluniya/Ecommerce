@@ -23,6 +23,11 @@
     list-style: none;
     padding: 0;
 }
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .movie-item {
     background-color: #f8f9fa;

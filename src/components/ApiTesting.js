@@ -3,8 +3,10 @@ import './ApiTesting.css';
 
 const ApiTesting = () => {
     const [moviesList, setMoviesList] = useState([]);
+    const [isLoading,setIsLoading] = useState(false);
     
     const fetchMovieHandler = async () => {
+        setIsLoading(true);
         try {
             const response = await fetch('https://swapi.dev/api/films');
             if (!response.ok) {
@@ -17,14 +19,17 @@ const ApiTesting = () => {
                 openingText: movie.opening_crawl,
                 releaseDate: movie.release_date,
             }));
+            if(response.ok){
+                setIsLoading(false);
+            }
             setMoviesList(transferredMovies);
         } catch (error) {
             console.error('Error fetching movies:', error);
         }
     };
-    
-    console.log(moviesList);
 
+    if(isLoading) return <div className='loading'><h2>Loading...</h2></div>;
+    
     return (
         <div className="api-testing">
             <h2>Movies</h2>
