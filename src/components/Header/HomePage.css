@@ -1,0 +1,102 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; /* Align all content to the center */
+  }
+  
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .album-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: space-evenly;
+  }
+  
+  .album-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .album-image {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+  }
+  
+  .album-title {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  .album-price {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  .add-to-cart {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #0056b3;
+  }
+  
+  .play-btn {
+    font-size: 24px; /* Adjust icon size */
+    margin-left: 10px; /* Add some space between the buttons */
+  }
+  
+  .tour-item {
+    margin-top: 20px; /* Add margin between tour items */
+    border-top: 1px solid #ccc; /* Add border between tour items */
+    padding-top: 20px; /* Add padding between tour items */
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center the button */
+    align-items: center; /* Center vertically */
+    margin-bottom: 20px;
+  }
+  
+  .go-to-latest {
+    margin-right: 10px; /* Add margin between buttons */
+  }
+  
+  .play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .play-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  
