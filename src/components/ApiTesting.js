@@ -4,22 +4,23 @@ import './ApiTesting.css';
 const ApiTesting = () => {
     const [moviesList, setMoviesList] = useState([]);
     
-    const fetchMovieHandler = () => {
-        fetch('https://swapi.dev/api/films')
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                const transferredMovies = data.results.map(movie => {
-                    return {
-                        id: movie.episode_id,
-                        title: movie.title,
-                        openingText: movie.opening_crawl,
-                        releaseDate: movie.release_date,
-                    };
-                });
-                setMoviesList(transferredMovies);
-            });
+    const fetchMovieHandler = async () => {
+        try {
+            const response = await fetch('https://swapi.dev/api/films');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            const transferredMovies = data.results.map(movie => ({
+                id: movie.episode_id,
+                title: movie.title,
+                openingText: movie.opening_crawl,
+                releaseDate: movie.release_date,
+            }));
+            setMoviesList(transferredMovies);
+        } catch (error) {
+            console.error('Error fetching movies:', error);
+        }
     };
     
     console.log(moviesList);
