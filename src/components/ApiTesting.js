@@ -1,26 +1,51 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ApiTesting.css';
-
+import AddMovie from './AddMovie';
 const ApiTesting = () => {
     const [moviesList, setMoviesList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const retryInterval = useRef(null);
 
+    const addMovieHandler = async (movieData)=>{
+        const response = await fetch('https://ecommerce-http-513d4-default-rtdb.firebaseio.com/data.json',{
+            method:'POST',
+            body: JSON.stringify(movieData),
+            headers:{
+                'content-type':'application/json'
+            }
+        })
+        const data = response.json();
+        console.log(data);
+    }
+
     const fetchMovies = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('https://swapi.dev/api/films');
+            const response = await fetch('https://ecommerce-http-513d4-default-rtdb.firebaseio.com/data.json');
             if (!response.ok) {
                 throw new Error('Something went wrong Retrying...');
             }
             const data = await response.json();
-            const transferredMovies = data.results.map(movie => ({
-                id: movie.episode_id,
-                title: movie.title,
-                openingText: movie.opening_crawl,
-                releaseDate: movie.release_date,
-            }));
+
+            const transferredMovies = [];
+            for (const key in data) {
+                
+                transferredMovies.push({
+                    id : key,
+                    title : data[key].title,
+                    openingText : data[key].openingText,
+                    releaseDate : data[key].releaseDate,
+                })
+            }
+
+            // const transferredMovies = data.map(movie => ({
+            //     id: movie.episode_id,
+            //     title: movie.title,
+            //     openingText: movie.opening_crawl,
+            //     releaseDate: movie.release_date,
+            // }));
+
             setMoviesList(transferredMovies);
         } catch (error) {
             setError(error.message);
@@ -56,6 +81,8 @@ const ApiTesting = () => {
     if (isLoading) return <div className='loading'><h2>Loading...</h2></div>;
 
     return (
+        <>
+        <AddMovie onAddMovie={addMovieHandler}/>
         <div className="api-testing">
             <h2>Movies</h2>
             <button onClick={fetchMovieHandler} className="fetch-button">Fetch Movies</button>
@@ -69,6 +96,7 @@ const ApiTesting = () => {
                 ))}
             </ul>
         </div>
+        </>
     );
 }
 
