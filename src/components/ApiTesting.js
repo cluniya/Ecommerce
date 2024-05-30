@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ApiTesting.css';
 
 const ApiTesting = () => {
@@ -7,12 +7,12 @@ const ApiTesting = () => {
     const [error, setError] = useState('');
     const retryInterval = useRef(null);
 
-    const fetchMovieHandler = async () => {
+    const fetchMovies = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('https://swapi.dev/api/film');
+            const response = await fetch('https://swapi.dev/api/films');
             if (!response.ok) {
-                throw new Error('Something went wrong... Retrying');
+                throw new Error('Something went wrong Retrying...');
             }
             const data = await response.json();
             const transferredMovies = data.results.map(movie => ({
@@ -24,10 +24,19 @@ const ApiTesting = () => {
             setMoviesList(transferredMovies);
         } catch (error) {
             setError(error.message);
-            retryInterval.current = setInterval(fetchMovieHandler, 5000);
+            retryInterval.current = setInterval(fetchMovies, 5000);
         }
-        setIsLoading(false)
+        setIsLoading(false);
     };
+
+    const fetchMovieHandler = useCallback(fetchMovies, []);
+
+    useEffect(() => {
+        fetchMovieHandler();
+        return () => {
+            clearInterval(retryInterval.current);
+        };
+    }, [fetchMovieHandler]);
 
     const cancelRetryHandler = () => {
         clearInterval(retryInterval.current);
