@@ -26,7 +26,8 @@ const AddMovie = ({ onAddMovie }) => {
     };
 
     return (
-        <form onSubmit={submitHandler}>
+        <div className='container'>
+            <form onSubmit={submitHandler}>
             <div>
                 <label htmlFor="title">Title</label>
                 <input
@@ -34,6 +35,7 @@ const AddMovie = ({ onAddMovie }) => {
                     id="title"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
+                    required
                 />
             </div>
             <div>
@@ -43,6 +45,7 @@ const AddMovie = ({ onAddMovie }) => {
                     rows="5"
                     value={openingText}
                     onChange={(event) => setOpeningText(event.target.value)}
+                    required
                 />
             </div>
             <div>
@@ -52,10 +55,12 @@ const AddMovie = ({ onAddMovie }) => {
                     id="releaseDate"
                     value={releaseDate}
                     onChange={(event) => setReleaseDate(event.target.value)}
+                    required
                 />
             </div>
             <button type="submit">Add Movie</button>
         </form>
+        </div>
     );
 };
 

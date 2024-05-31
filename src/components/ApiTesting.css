@@ -18,13 +18,24 @@
 .fetch-button:hover {
     background-color: #0056b3;
 }
+.delete-button {
+    display: block;
+    /* width: 100%; */
+    /* padding: 0.75rem; */
+    font: inherit;
+    background-color: #f80945;
+    color: white;
+    border: 1px solid #ff2058;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 .movies-list {
     list-style: none;
     padding: 0;
 }
 .loading{
-    display: flex;
+    display: fl;
     justify-content: center;
     align-items: center;
 }
