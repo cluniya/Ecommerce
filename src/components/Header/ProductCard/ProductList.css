@@ -1,0 +1,15 @@
+/* src/components/Home/ProductCard/ProductList.css */
+.container {
+    margin-top: 50px;
+  }
+  
+  .product-card {
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .product-card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  

@@ -1,0 +1,45 @@
+/* src/components/Header/ProductDetail/ProductDetails.css */
+.product-details {
+    margin-top: 20px;
+  }
+  
+  .reviews-section {
+    margin-top: 20px;
+  }
+  
+  .reviews-section h2 {
+    margin-bottom: 10px;
+  }
+  
+  .review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .review p {
+    margin: 0;
+  }
+  
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel .carousel-item {
+    text-align: center;
+  }
+  
+  .zoom-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .zoom-image {
+    transition: transform 0.5s ease;
+    width: 100%;
+  }
+  
+  .zoom-container:hover .zoom-image {
+    transform: scale(1.5);
+  }
+  
