@@ -15,8 +15,9 @@ function HeaderNavbar(props) {
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/store">Store</Nav.Link> Added Store link
+              <Nav.Link as={Link} to="/store">Store</Nav.Link>
               <Nav.Link as={Link} to="/about">About us</Nav.Link>
+              <Nav.Link as={Link} to="/contact">Contact us</Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
