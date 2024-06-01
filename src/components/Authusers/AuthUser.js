@@ -33,6 +33,7 @@ const AuthUser = () => {
     }).then(res => {
       setIsLoading(false);
       if (res.ok) {
+        console.log(res.json());
         return res.json();
       } else {
         return res.json().then(data => {
@@ -44,7 +45,7 @@ const AuthUser = () => {
         });
       }
     }).then(data => {
-      console.log(data);
+      // console.log(data);
     }).catch(err => {
       setIsLoading(false);
       alert(err.message);
