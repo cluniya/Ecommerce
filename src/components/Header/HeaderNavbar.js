@@ -19,7 +19,6 @@ function HeaderNavbar(props) {
       authCtx.logout();
     }
   }
-
   const [showChangePassword, setShowChangePassword] = useState(false);
 
   const handleClose = () => setShowChangePassword(false);
@@ -58,10 +57,10 @@ function HeaderNavbar(props) {
       <CartItem />
       <Modal show={showChangePassword} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Change Password</Modal.Title>
+          <Modal.Title >Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ChangePassword />
+          <ChangePassword onClick={handleClose}/>
         </Modal.Body>
       </Modal>
     </>
