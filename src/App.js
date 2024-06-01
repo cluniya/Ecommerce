@@ -10,6 +10,8 @@ import Home from './components/Header/Home';
 import ProductDetails from './components/Header/ProductDetail/ProductDetails';
 import HomePage from './components/Header/HomePage';
 import Contact from './components/Header/Contact';
+import AuthUser from './components/Authusers/AuthUser';
+
 const productsArr = [
   {
     id: 1,
@@ -88,6 +90,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:productId" element={<ProductDetails products={productsArr} />} />
+          <Route path="/auth" element={<AuthUser />} />
         </Routes>
       </Router>
     </CartProvider>

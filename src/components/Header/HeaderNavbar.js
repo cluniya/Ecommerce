@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Navbar, Nav, NavDropdown, Form, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import './HeaderNavbar.css';
 import CartButton from '../Cart/CartButton';
 import CartItem from '../Cart/CartItem';
@@ -26,10 +26,9 @@ function HeaderNavbar(props) {
               </NavDropdown>
               <Nav.Link href="#" disabled>Link</Nav.Link>
             </Nav>
-            <Form className="d-flex">
-              <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
-              <Button variant="outline-success">Search</Button>
-            </Form>
+            <Button variant="outline-primary" as={Link} to="/auth" className="me-2">
+              Sign In
+            </Button>
             <CartButton />
           </Navbar.Collapse>
         </Container>
