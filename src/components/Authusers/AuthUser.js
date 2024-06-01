@@ -1,10 +1,12 @@
 // src/components/Auth/AuthUser.js
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import AuthContext from '../../Store/AuthContext';
 
 const AuthUser = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const Authctx = useContext(AuthContext);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -33,7 +35,7 @@ const AuthUser = () => {
     }).then(res => {
       setIsLoading(false);
       if (res.ok) {
-        console.log(res.json());
+        
         return res.json();
       } else {
         return res.json().then(data => {
@@ -45,7 +47,7 @@ const AuthUser = () => {
         });
       }
     }).then(data => {
-      // console.log(data);
+      if(isLogin) Authctx.login(data.idToken);
     }).catch(err => {
       setIsLoading(false);
       alert(err.message);

@@ -11,6 +11,7 @@ import ProductDetails from './components/Header/ProductDetail/ProductDetails';
 import HomePage from './components/Header/HomePage';
 import Contact from './components/Header/Contact';
 import AuthUser from './components/Authusers/AuthUser';
+import { AuthContextProvider } from './Store/AuthContext';
 
 const productsArr = [
   {
@@ -81,6 +82,7 @@ const productsArr = [
 
 const App = () => {
   return (
+    <AuthContextProvider>
     <CartProvider>
       <Router>
         <HeaderNavbar productData={productsArr} />
@@ -94,6 +96,7 @@ const App = () => {
         </Routes>
       </Router>
     </CartProvider>
+    </AuthContextProvider>
   );
 }
 

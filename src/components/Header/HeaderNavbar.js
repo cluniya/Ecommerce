@@ -1,11 +1,30 @@
-import React from 'react';
+// src/components/Header/HeaderNavbar.js
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Button, Modal } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import './HeaderNavbar.css';
 import CartButton from '../Cart/CartButton';
 import CartItem from '../Cart/CartItem';
+import AuthContext from '../../Store/AuthContext';
+import ChangePassword from '../Authusers/ChangePassword';
 
 function HeaderNavbar(props) {
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+
+  const logoutHandler = ()=>{
+    if (isLoggedIn) {
+      authCtx.logout();
+    }
+  }
+
+  const [showChangePassword, setShowChangePassword] = useState(false);
+
+  const handleClose = () => setShowChangePassword(false);
+  const handleShow = () => setShowChangePassword(true);
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -26,14 +45,25 @@ function HeaderNavbar(props) {
               </NavDropdown>
               <Nav.Link href="#" disabled>Link</Nav.Link>
             </Nav>
-            <Button variant="outline-primary" as={Link} to="/auth" className="me-2">
-              Sign In
+            <Button onClick = {logoutHandler} variant="outline-primary" as={Link} to="/auth" className="me-2">
+              {isLoggedIn ? 'Logout' : 'Sign In'}
             </Button>
             <CartButton />
+            {isLoggedIn && (
+              <FontAwesomeIcon icon={faUser} className="ms-3" style={{ cursor: 'pointer' }} onClick={handleShow} />
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <CartItem />
+      <Modal show={showChangePassword} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Change Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ChangePassword />
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
