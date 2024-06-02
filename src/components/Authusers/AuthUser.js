@@ -2,10 +2,11 @@
 import React, { useContext, useRef, useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import AuthContext from '../../Store/AuthContext';
-
+import {useNavigate} from 'react-router-dom';
 const AuthUser = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const history = useNavigate();
   const Authctx = useContext(AuthContext);
 
   const emailRef = useRef();
@@ -37,6 +38,7 @@ const AuthUser = () => {
       if (res.ok) {
         emailRef.current.value = '';
         passwordRef.current.value = '';
+        history('/');
         return res.json();
       } else {
         return res.json().then(data => {

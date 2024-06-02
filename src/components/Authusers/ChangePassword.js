@@ -2,6 +2,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import AuthContext from '../../Store/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const ChangePassword = (props) => {
   const authCtx = useContext(AuthContext);
@@ -9,6 +10,7 @@ const ChangePassword = (props) => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
+  const history = useNavigate();
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -33,6 +35,7 @@ const ChangePassword = (props) => {
           newPasswordRef.current.value = '';
           setShowAlert(true);
           setTimeout(() => setShowAlert(false), 3000); // Hide alert after 3 seconds
+          history('/');
         } else {
           return res.json().then(data => {
             let errorMessage = 'Password update failed!';
