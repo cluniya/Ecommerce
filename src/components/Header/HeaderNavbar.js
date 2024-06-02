@@ -1,5 +1,4 @@
-// src/components/Header/HeaderNavbar.js
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Navbar, Nav, NavDropdown, Button, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,15 +13,32 @@ function HeaderNavbar(props) {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
 
-  const logoutHandler = ()=>{
+  const logoutHandler = () => {
     if (isLoggedIn) {
       authCtx.logout();
     }
-  }
+  };
+
   const [showChangePassword, setShowChangePassword] = useState(false);
 
   const handleClose = () => setShowChangePassword(false);
   const handleShow = () => setShowChangePassword(true);
+
+  useEffect(() => {
+    const resetLogoutTimer = () => {
+      if (isLoggedIn) {
+        authCtx.logout();
+      }
+    };
+
+    // window.addEventListener('mousemove', resetLogoutTimer);
+    // window.addEventListener('keypress', resetLogoutTimer);
+
+    return () => {
+      window.removeEventListener('mousemove', resetLogoutTimer);
+      window.removeEventListener('keypress', resetLogoutTimer);
+    };
+  }, [isLoggedIn, authCtx]);
 
   return (
     <>
@@ -44,7 +60,7 @@ function HeaderNavbar(props) {
               </NavDropdown>
               <Nav.Link href="#" disabled>Link</Nav.Link>
             </Nav>
-            <Button onClick = {logoutHandler} variant="outline-primary" as={Link} to="/auth" className="me-2">
+            <Button onClick={logoutHandler} variant="outline-primary" as={Link} to="/auth" className="me-2">
               {isLoggedIn ? 'Logout' : 'Sign In'}
             </Button>
             <CartButton />
@@ -57,10 +73,10 @@ function HeaderNavbar(props) {
       <CartItem />
       <Modal show={showChangePassword} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title >Change Password</Modal.Title>
+          <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ChangePassword onClick={handleClose}/>
+          <ChangePassword />
         </Modal.Body>
       </Modal>
     </>

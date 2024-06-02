@@ -50,7 +50,9 @@ const AuthUser = () => {
         });
       }
     }).then(data => {
-      if(isLogin) Authctx.login(data.idToken);
+      if(isLogin){
+        Authctx.login(data.idToken);
+      }
     }).catch(err => {
       setIsLoading(false);
       alert(err.message);
