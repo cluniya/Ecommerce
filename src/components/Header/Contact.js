@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import React, { useState, Suspense } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+
+// Lazy load the Alert component
+const Alert = React.lazy(() => import('react-bootstrap/Alert'));
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,22 +17,24 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-    // event.preventDefault();
+    e.preventDefault();
     try {
-        await fetch('https://ecommerce-http-513d4-default-rtdb.firebaseio.com/userQueries.json',{
-            method:'POST',
-            body: JSON.stringify(formData),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-        })
-        setFormData('');
-       
+      const response = await fetch('https://ecommerce-http-513d4-default-rtdb.firebaseio.com/userQueries.json', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to submit the form');
+      }
+
+      setFormData({ name: '', email: '', phone: '', query: '' });
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-    
-    console.log(formData,"data");
   };
 
   return (
@@ -88,6 +93,10 @@ const Contact = () => {
           </Form>
         </Col>
       </Row>
+      {/* Suspense with fallback for lazy loaded Alert component */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Alert />
+      </Suspense>
     </Container>
   );
 };

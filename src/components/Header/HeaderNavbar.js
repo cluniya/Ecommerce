@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Navbar, Nav, NavDropdown, Button, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import './HeaderNavbar.css';
-import CartButton from '../Cart/CartButton';
-import CartItem from '../Cart/CartItem';
 import AuthContext from '../../Store/AuthContext';
-import ChangePassword from '../Authusers/ChangePassword';
+
+const CartButton = lazy(() => import('../Cart/CartButton'));
+const CartItem = lazy(() => import('../Cart/CartItem'));
+const ChangePassword = lazy(() => import('../Authusers/ChangePassword'));
 
 function HeaderNavbar(props) {
   const authCtx = useContext(AuthContext);
@@ -63,20 +64,26 @@ function HeaderNavbar(props) {
             <Button onClick={logoutHandler} variant="outline-primary" as={Link} to="/auth" className="me-2">
               {isLoggedIn ? 'Logout' : 'Sign In'}
             </Button>
-            <CartButton />
+            <Suspense fallback={<div>Loading...</div>}>
+              <CartButton />
+            </Suspense>
             {isLoggedIn && (
               <FontAwesomeIcon icon={faUser} className="ms-3" style={{ cursor: 'pointer' }} onClick={handleShow} />
             )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <CartItem />
+      <Suspense fallback={<div>Loading...</div>}>
+        <CartItem />
+      </Suspense>
       <Modal show={showChangePassword} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ChangePassword />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ChangePassword />
+          </Suspense>
         </Modal.Body>
       </Modal>
     </>
