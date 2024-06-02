@@ -1,3 +1,4 @@
+// src/components/Cart/CartItem.js
 import React, { useContext } from 'react';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import './CartItem.css';

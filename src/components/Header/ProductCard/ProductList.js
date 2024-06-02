@@ -7,14 +7,11 @@ import { CartContext } from '../../../Store/CartContext';
 
 const ProductList = ({ productData }) => {
   const { addItemToCart } = useContext(CartContext);
-
   const navigate = useNavigate();
 
   const handleCardClick = (productId) => {
     navigate(`/product/${productId}`);
   };
-
-  
 
   return (
     <Container>
@@ -26,7 +23,10 @@ const ProductList = ({ productData }) => {
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>${product.price}</Card.Text>
-                <Button variant="primary" onClick={(e) => {e.stopPropagation(); addItemToCart(product);}}>
+                <Button variant="primary" onClick={(e) => {
+                  e.stopPropagation();
+                  addItemToCart(product);
+                }}>
                   Add to Cart
                 </Button>
               </Card.Body>
