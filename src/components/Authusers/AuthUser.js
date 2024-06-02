@@ -35,7 +35,8 @@ const AuthUser = () => {
     }).then(res => {
       setIsLoading(false);
       if (res.ok) {
-        
+        emailRef.current.value = '';
+        passwordRef.current.value = '';
         return res.json();
       } else {
         return res.json().then(data => {
@@ -57,6 +58,10 @@ const AuthUser = () => {
   const toggleAuthMode = () => {
     setIsLogin(!isLogin);
   };
+
+  if (Authctx.isLoggedIn) {
+    return <h2>you are Successfully logged in...</h2>
+  }
 
   return (
     <Container className="mt-5">
