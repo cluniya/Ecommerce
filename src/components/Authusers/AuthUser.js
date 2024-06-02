@@ -1,4 +1,5 @@
-// src/components/Auth/AuthUser.js
+//Added Login to Ecommerce
+
 import React, { useContext, useRef, useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import AuthContext from '../../Store/AuthContext';
