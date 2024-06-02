@@ -1,17 +1,14 @@
-// src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HeaderNavbar from './components/Header/HeaderNavbar';
 import { CartProvider } from './Store/CartContext';
 import About from './components/About/About';
-// import Home from './components/Home/Home';
 import Home from './components/Header/Home';
-// import ProductDetails from './components/ProductDetails/ProductDetails';
 import ProductDetails from './components/Header/ProductDetail/ProductDetails';
 import HomePage from './components/Header/HomePage';
 import Contact from './components/Header/Contact';
 import AuthUser from './components/Authusers/AuthUser';
-import { AuthContextProvider } from './Store/AuthContext';
+import { AuthContextProvider, AuthContext } from './Store/AuthContext';
 
 const productsArr = [
   {
@@ -81,23 +78,29 @@ const productsArr = [
 ];
 
 const App = () => {
+
+  const authCtx = useContext(AuthContext);  
+console.log(authCtx.isLoggedIn);
   return (
-    <AuthContextProvider>
-    <CartProvider>
-      <Router>
-        <HeaderNavbar productData={productsArr} />
-        <Routes>
-       < Route path="/" element={<HomePage/>} />
-          <Route path="/store" element={<Home productData={productsArr} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/product/:productId" element={<ProductDetails products={productsArr} />} />
-          <Route path="/auth" element={<AuthUser />} />
-        </Routes>
-      </Router>
-    </CartProvider>
-    </AuthContextProvider>
+        <>
+          <HeaderNavbar productData={productsArr} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            {authCtx.isLoggedIn ?  (
+              <>
+                <Route path="/store" element={<Home productData={productsArr} />} />
+                <Route path="/product/:productId" element={<ProductDetails products={productsArr} />} />
+              </>
+            ) : (
+              <Route path="/store" element={<Navigate to="/auth" />} />
+            )}
+            <Route path="/auth" element={<AuthUser />} />
+          </Routes>
+        </>
+    
   );
-}
+};
 
 export default App;

@@ -39,7 +39,7 @@ const AuthUser = () => {
       if (res.ok) {
         emailRef.current.value = '';
         passwordRef.current.value = '';
-        history('/');
+        history("/");
         return res.json();
       } else {
         return res.json().then(data => {
@@ -64,10 +64,7 @@ const AuthUser = () => {
     setIsLogin(!isLogin);
   };
 
-  if (Authctx.isLoggedIn) {
-    return <h2>you are Successfully logged in...</h2>
-  }
-
+  console.log(Authctx.isLoggedIn);
   return (
     <Container className="mt-5">
       <Row className="justify-content-md-center">
